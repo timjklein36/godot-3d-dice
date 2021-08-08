@@ -15,6 +15,8 @@ signal final_face
 
 
 func _ready():
+    stable_threshhold = stable_threshhold / Engine.time_scale
+
     add_collision_exception_with(ROOF)
     for face in get_tree().get_nodes_in_group('faces'):
         if self.is_a_parent_of(face):
@@ -24,9 +26,6 @@ func _ready():
 func _process(_delta):
     if global_transform.origin.y < 0:
         queue_free()
-
-    if global_transform.origin.y < 4:
-        remove_collision_exception_with(ROOF)
 
     if not stability_free:
         return
@@ -57,6 +56,11 @@ func _process(_delta):
         emit_signal('final_face', str(len(faces)), face_up)
 
         queue_free()
+
+
+func _physics_process(_delta):
+    if global_transform.origin.y < 3:
+        remove_collision_exception_with(ROOF)
 
 
 func find_up_face():

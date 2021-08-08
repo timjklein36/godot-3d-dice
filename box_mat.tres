@@ -3,6 +3,7 @@
 [ext_resource path="res://checker.png" type="Texture" id=1]
 
 [resource]
-flags_unshaded = true
 albedo_texture = ExtResource( 1 )
+metallic_specular = 0.26
+roughness = 0.61
 uv1_scale = Vector3( 10, 10, 10 )

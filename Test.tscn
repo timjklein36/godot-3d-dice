@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://box_mat.tres" type="Material" id=1]
 [ext_resource path="res://Test.gd" type="Script" id=2]
@@ -29,6 +29,10 @@ bounce = 0.35
 
 [sub_resource type="BoxShape" id=6]
 
+[sub_resource type="Environment" id=8]
+
+[sub_resource type="CanvasItemMaterial" id=9]
+
 [node name="Test" type="Spatial"]
 script = ExtResource( 2 )
 auto_roll = true
@@ -44,6 +48,7 @@ shape = SubResource( 1 )
 transform = Transform( 12, 0, 0, 0, 2, 0, 0, 0, 12, 0, -1, 0 )
 
 [node name="CSGBox" type="CSGBox" parent="FLOOR"]
+layers = 2
 width = 1.0
 height = 1.0
 depth = 1.0
@@ -67,6 +72,7 @@ shape = SubResource( 4 )
 
 [node name="CSGBox2" type="CSGBox" parent="LeftWall"]
 transform = Transform( 0.1, 0, 0, 0, 12, 0, 0, 0, 12, -6, -3, 0 )
+layers = 2
 calculate_tangents = false
 use_collision = true
 width = 1.0
@@ -78,6 +84,7 @@ material = ExtResource( 1 )
 
 [node name="CSGBox3" type="CSGBox" parent="RightWall"]
 transform = Transform( 0.1, 0, 0, 0, 12, 0, 0, 0, 12, 6, -3, 0 )
+layers = 2
 calculate_tangents = false
 use_collision = true
 width = 1.0
@@ -96,6 +103,7 @@ shape = SubResource( 6 )
 
 [node name="CSGBox4" type="CSGBox" parent="FrontWall"]
 transform = Transform( -4.37114e-09, 0, 12, 0, 12, 0, -0.1, 0, -5.24537e-07, 0, -3, 6 )
+layers = 2
 calculate_tangents = false
 use_collision = true
 width = 1.0
@@ -114,6 +122,7 @@ shape = SubResource( 6 )
 
 [node name="CSGBox5" type="CSGBox" parent="BackWall"]
 transform = Transform( -4.37114e-09, 0, 12, 0, 12, 0, -0.1, 0, -5.24537e-07, 0, -3, -6 )
+layers = 2
 calculate_tangents = false
 use_collision = true
 width = 1.0
@@ -218,6 +227,53 @@ text = "d20"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 8 )
+
+[node name="Control" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="Control"]
+material = SubResource( 9 )
+margin_left = 1445.0
+margin_top = 927.0
+margin_right = 1868.0
+margin_bottom = 1199.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color( 0, 0.709804, 0, 0.0941176 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ViewportContainer" type="ViewportContainer" parent="Control"]
+margin_left = 1445.0
+margin_top = 927.0
+margin_right = 1868.0
+margin_bottom = 1199.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Viewport" type="Viewport" parent="Control/ViewportContainer"]
+size = Vector2( 423, 272 )
+transparent_bg = true
+handle_input_locally = false
+render_target_update_mode = 3
+
+[node name="TopDownCamera" type="Camera" parent="Control/ViewportContainer/Viewport"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 15.3211, 0 )
+cull_mask = 1048573
+projection = 1
+fov = 50.0
+size = 11.99
 
 [connection signal="pressed" from="Menu/AddDiceButton" to="." method="update_dice" binds= [ 1 ]]
 [connection signal="pressed" from="Menu/SubtractDiceButton" to="." method="update_dice" binds= [ -1 ]]
