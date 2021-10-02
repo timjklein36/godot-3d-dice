@@ -46,8 +46,8 @@ var keys_to_dice: Dictionary = {
 
 
 func _ready():
-    # Engine.time_scale = 100
-    # Engine.iterations_per_second = 360
+    Engine.time_scale = 100
+    Engine.iterations_per_second = 360
 
     get_tree().set_script(main_script)
     for die_name in record:
