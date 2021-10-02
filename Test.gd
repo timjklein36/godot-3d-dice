@@ -136,13 +136,13 @@ func roll(die):
 
         die_inst.visible = true
 
-        # die_inst.stability_free = true
+        die_inst.stability_free = true
 
         die_inst.add_to_group('dice')
 
         die_inst.apply_impulse(
             Vector3(0, 0, 0),
-            -transform.basis.z * 35
+            -transform.basis.z * 300
         )
 
         die_inst.apply_torque_impulse(

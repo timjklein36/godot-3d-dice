@@ -22,11 +22,11 @@ func _ready():
 
 
 func _process(_delta):
-    # if global_transform.origin.y < 0:
-    #     queue_free()
+    if global_transform.origin.y < 0:
+        queue_free()
 
-    # if global_transform.origin.y < 4:
-    #     remove_collision_exception_with(ROOF)
+    if global_transform.origin.y < 4:
+        remove_collision_exception_with(ROOF)
 
     if not stability_free:
         return
